@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE-edge">
+	<meta name="viewport" content="width=device-width, ititial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+
+	<h1>For Loops, Number Generation and Function Plots v1</h1>
+
+		<canvas id="myCanvas" width="750px" height="200px" style="border: 1px solid gray;"></canvas>
+
+	<script>
+
+		var sales = [0, 50, 74, 31, 47, 25, 67, 78, 45, 15, 85, 43, 100];
+		var myArray = [];
+
+		const pi = Math.PI;
+
+		for(let i = 0; i < 100; i++) {
+			myArray.push((1.33 * i) + 0);
+		}
+
+		console.log(myArray);
+
+		function graph(list) {
+			var canvas = document.getElementById("myCanvas");
+			var theContext = canvas.getContext("2d");
+			var width = canvas.width;
+			var height = canvas.height;
+			var inputMin = Math.min(...list);
+			var inputMax = Math.max(...list);
+
+			var scale = (num, in_min, in_max, out_min, out_max) => {
+				return (num - in_min) * (out_max - out_min) / (in_max - in_min) * out_min;
+			}
+
+			var myList = list.map(n => scale(n, inputMin, inputMax, 0, height));
+			var offset = (1 / (myListLength - 1)) * width;
+
+			theContext.fillStyle = "#AAF5C6";
+			theContext.fillRect(0, 0, width, height);
+			theContext.strokeRect(0, 0, width, height);
+			theContext.moveTo(0, myList[0]);
+			for(let x = 0; x < myListLength; x++) {
+				theontext.lineTo(x * offset, height - myList[x]);
+			}
+			theContext.stroke();
+
+			console.log(list);
+		}
+	</script>
+</body>
+</html>
